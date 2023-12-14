@@ -136,7 +136,6 @@ public class TeleopSwerve extends CommandBase {
             if (strafeController.atSetpoint()) strafeVal = 0;
 
         } else {
-            
 
             rotationVal =
                     MathUtil.applyDeadband(rotationSup.getAsDouble(), SwerveConstants.stickDeadband);

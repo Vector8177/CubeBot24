@@ -148,7 +148,6 @@ public class Swerve extends SubsystemBase {
         return Rotation2d.fromDegrees(gyroInputs.rollPosition);
     }
 
-
     @Override
     public void periodic() {
         gyroIO.updateInputs(gyroInputs);
@@ -157,7 +156,6 @@ public class Swerve extends SubsystemBase {
         }
 
         swervePoseEstimator.update(getYaw(), getPositions());
-
 
         Logger.getInstance().processInputs("Drive/Gyro", gyroInputs);
         Logger.getInstance().recordOutput("Odometry/RobotPose", getPose());
