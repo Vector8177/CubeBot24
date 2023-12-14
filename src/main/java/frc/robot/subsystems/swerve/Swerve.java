@@ -1,6 +1,6 @@
 package frc.robot.subsystems.swerve;
 
-import com.pathplanner.lib.PathPoint;
+// import com.pathplanner.lib.PathPoint;
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -134,9 +134,9 @@ public class Swerve extends SubsystemBase {
         return Rotation2d.fromDegrees(gyroInputs.pitchPosition);
     }
 
-    public PathPoint getPoint() {
-        return PathPoint.fromCurrentHolonomicState(getPose(), chassisSpeeds);
-    }
+    // public PathPoint getPoint() {
+    //     return PathPoint.fromCurrentHolonomicState(getPose(), chassisSpeeds);
+    // }
 
     public Rotation2d getYaw() {
         return (SwerveConstants.invertGyro)

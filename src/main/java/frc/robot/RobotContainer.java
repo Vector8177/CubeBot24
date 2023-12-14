@@ -58,10 +58,10 @@
 
 package frc.robot;
 
-import com.pathplanner.lib.PathPlanner;
-import com.pathplanner.lib.PathPlannerTrajectory;
-import com.pathplanner.lib.auto.PIDConstants;
-import com.pathplanner.lib.auto.SwerveAutoBuilder;
+// import com.pathplanner.lib.PathPlanner;
+// import com.pathplanner.lib.PathPlannerTrajectory;
+// import com.pathplanner.lib.auto.PIDConstants;
+// import com.pathplanner.lib.auto.SwerveAutoBuilder;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -75,7 +75,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.GamePiece;
 // import frc.robot.Constants.Position;
-import frc.robot.autos.AutoBalancing;
+// import frc.robot.autos.AutoBalancing;
 import frc.robot.commands.*;
 import frc.robot.subsystems.swerve.GyroIO;
 import frc.robot.subsystems.swerve.GyroIOPigeon2;
@@ -111,37 +111,37 @@ public class RobotContainer {
     public static GamePiece gamePiece = GamePiece.CONE;
 
     /* Autonomous Mode Chooser */
-    private final LoggedDashboardChooser<PathPlannerTrajectory> autoChooser =
-            new LoggedDashboardChooser<>("Auto Choices");
+//     private final LoggedDashboardChooser<PathPlannerTrajectory> autoChooser =
+//             new LoggedDashboardChooser<>("Auto Choices");
 
-    /* Autonomous */
-    private final SwerveAutoBuilder autoBuilder;
+//     /* Autonomous */
+//     private final SwerveAutoBuilder autoBuilder;
 
-    private static Map<String, Command> eventMap;
+//     private static Map<String, Command> eventMap;
 
-    private final PathPlannerTrajectory autoBalance = PathPlanner.loadPath("Autobalance", 1, 3);
+//     private final PathPlannerTrajectory autoBalance = PathPlanner.loadPath("Autobalance", 1, 3);
 
-    private final PathPlannerTrajectory coneMobilBalance =
-            PathPlanner.loadPath("coneMobilityBalance", 2.0, 1.25);
+//     private final PathPlannerTrajectory coneMobilBalance =
+//             PathPlanner.loadPath("coneMobilityBalance", 2.0, 1.25);
 
-    private final PathPlannerTrajectory cubeMobilBalance =
-            PathPlanner.loadPath("cubeMobilityBalance", 2.0, 1.25);
+//     private final PathPlannerTrajectory cubeMobilBalance =
+//             PathPlanner.loadPath("cubeMobilityBalance", 2.0, 1.25);
 
-    private final PathPlannerTrajectory twoPlusBalance =
-            PathPlanner.loadPath("score2Balance", 3.5, 2.5);
+//     private final PathPlannerTrajectory twoPlusBalance =
+//             PathPlanner.loadPath("score2Balance", 3.5, 2.5);
 
-    private final PathPlannerTrajectory twoPlusPickup =
-            PathPlanner.loadPath("score2Pickup1", 3.5, 2.25);
+//     private final PathPlannerTrajectory twoPlusPickup =
+//             PathPlanner.loadPath("score2Pickup1", 3.5, 2.25);
 
-    private final PathPlannerTrajectory threePieceAuto =
-            PathPlanner.loadPath("threePieceAuto", 3.5, 3.0);
+//     private final PathPlannerTrajectory threePieceAuto =
+//             PathPlanner.loadPath("threePieceAuto", 3.5, 3.0);
 
-    private final PathPlannerTrajectory bump2Piece = PathPlanner.loadPath("bump2PieceAuto", 3.5, 2.5);
+//     private final PathPlannerTrajectory bump2Piece = PathPlanner.loadPath("bump2PieceAuto", 3.5, 2.5);
 
-    private final PathPlannerTrajectory bump3Piece = PathPlanner.loadPath("bump3PieceAuto", 3.5, 2.5);
+//     private final PathPlannerTrajectory bump3Piece = PathPlanner.loadPath("bump3PieceAuto", 3.5, 2.5);
 
-    private final PathPlannerTrajectory bump3PieceAlt =
-            PathPlanner.loadPath("bump3PieceAutoAlt", 2.0, 2.5);
+//     private final PathPlannerTrajectory bump3PieceAlt =
+//             PathPlanner.loadPath("bump3PieceAutoAlt", 2.0, 2.5);
 
     
     public RobotContainer() {
@@ -185,17 +185,17 @@ public class RobotContainer {
         // Configure autonomous events
         configureAutonomousEvents();
 
-        autoBuilder =
-                new SwerveAutoBuilder(
-                        s_Swerve::getPose,
-                        s_Swerve::resetOdometry,
-                        SwerveConstants.swerveKinematics, // SwerveDriveKinematics
-                        new PIDConstants(Constants.Autonomous.kPXController, 0, 0),
-                        new PIDConstants(Constants.Autonomous.kPThetaController, 0, 0),
-                        s_Swerve::setModuleStates,
-                        eventMap,
-                        true,
-                        s_Swerve);
+        // autoBuilder =
+        //         new SwerveAutoBuilder(
+        //                 s_Swerve::getPose,
+        //                 s_Swerve::resetOdometry,
+        //                 SwerveConstants.swerveKinematics, // SwerveDriveKinematics
+        //                 new PIDConstants(Constants.Autonomous.kPXController, 0, 0),
+        //                 new PIDConstants(Constants.Autonomous.kPThetaController, 0, 0),
+        //                 s_Swerve::setModuleStates,
+        //                 eventMap,
+        //                 true,
+        //                 s_Swerve);
     }
 
     private void setDefaultCommands() {
@@ -216,11 +216,11 @@ public class RobotContainer {
 
     private void configureAutonomousEvents() {
 
-        eventMap.put("wait1Seconds", new WaitCommand(1));
+        // eventMap.put("wait1Seconds", new WaitCommand(1));
 
-        eventMap.put("AutoBalance", new AutoBalancing(s_Swerve, true));
+        // eventMap.put("AutoBalance", new AutoBalancing(s_Swerve, true));
 
-        eventMap.put("AutoBalanceStraight", new AutoBalancing(s_Swerve, false));
+        // eventMap.put("AutoBalanceStraight", new AutoBalancing(s_Swerve, false));
     }
 
     /**
@@ -260,17 +260,17 @@ public class RobotContainer {
 
     private void configureSmartDashboard() {
         // Autonomous Mode Chooser
-        autoChooser.addOption("Clean: Score 2 Plus Balance", twoPlusBalance);
-        autoChooser.addOption("Clean: 3 Game Piece Auto", threePieceAuto);
-        autoChooser.addOption("Clean: Score 2 Plus Field", twoPlusPickup);
+        // autoChooser.addOption("Clean: Score 2 Plus Balance", twoPlusBalance);
+        // autoChooser.addOption("Clean: 3 Game Piece Auto", threePieceAuto);
+        // autoChooser.addOption("Clean: Score 2 Plus Field", twoPlusPickup);
 
-        autoChooser.addOption("Center: Cube Balance", autoBalance);
-        autoChooser.addOption("Center: Cone Mobility Balance", coneMobilBalance);
-        autoChooser.addOption("Center: Cube Mobility Balance", cubeMobilBalance);
+        // autoChooser.addOption("Center: Cube Balance", autoBalance);
+        // autoChooser.addOption("Center: Cone Mobility Balance", coneMobilBalance);
+        // autoChooser.addOption("Center: Cube Mobility Balance", cubeMobilBalance);
 
-        autoChooser.addOption("Bump: 2 Piece", bump2Piece);
-        autoChooser.addOption("Bump: 3 Piece", bump3Piece);
-        autoChooser.addOption("Bump: 3 Piece Alt", bump3PieceAlt);
+        // autoChooser.addOption("Bump: 2 Piece", bump2Piece);
+        // autoChooser.addOption("Bump: 3 Piece", bump3Piece);
+        // autoChooser.addOption("Bump: 3 Piece Alt", bump3PieceAlt);
 
         // autoChooser.addDefaultOption("Cone PickupCube Balance", coneCubeBalance);
         // autoChooser.addOption("Back and Forth", backnForth);
@@ -281,7 +281,6 @@ public class RobotContainer {
     /** Ran once the robot is put in disabled */
     public void disabledPeriodic() {
     }
-
     public static GamePiece getGamePiece() {
         return gamePiece;
     }
@@ -295,14 +294,14 @@ public class RobotContainer {
      *
      * @return the command to run in autonomous
      */
-    public Command getAutonomousCommand() {
+//     public Command getAutonomousCommand() {
         // s_Swerve.setYaw(Rotation2d.fromDegrees(180));
-        Logger.getInstance().recordOutput("Trajectory", autoChooser.get());
+        // Logger.getInstance().recordOutput("Trajectory", autoChooser.get());
 
-        // Executes the autonomous command chosen in smart dashboard
-        return new ParallelCommandGroup(
-                new InstantCommand(
-                        () -> s_Swerve.getField().getObject("Field").setTrajectory(autoChooser.get())),
-                autoBuilder.fullAuto(autoChooser.get()));
-    }
+        // // Executes the autonomous command chosen in smart dashboard
+        // return new ParallelCommandGroup(
+        //         new InstantCommand(
+        //                 () -> s_Swerve.getField().getObject("Field").setTrajectory(autoChooser.get())),
+        //         autoBuilder.fullAuto(autoChooser.get()));
+//     }/
 }
