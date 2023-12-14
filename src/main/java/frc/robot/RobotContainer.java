@@ -93,7 +93,7 @@ import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 public class RobotContainer {
     /* Controllers */
     private final CommandXboxController driver = new CommandXboxController(0);
-//     private final CommandXboxController operator = new CommandXboxController(1);
+    //     private final CommandXboxController operator = new CommandXboxController(1);
 
     /* Drive Controls */
     private static final int translationAxis = XboxController.Axis.kLeftY.value;
@@ -101,9 +101,9 @@ public class RobotContainer {
     private static final int rotationAxis = XboxController.Axis.kRightX.value;
 
     /* Operator Controls */
-//     private static final int elevatorAxis = XboxController.Axis.kLeftY.value;
-//     private static final int wristAxis = XboxController.Axis.kRightY.value;
-//     private static final int intakeTrigger = XboxController.Axis.kRightTrigger.value;
+    //     private static final int elevatorAxis = XboxController.Axis.kLeftY.value;
+    //     private static final int wristAxis = XboxController.Axis.kRightY.value;
+    //     private static final int intakeTrigger = XboxController.Axis.kRightTrigger.value;
 
     /* Subsystems */
     private final Swerve s_Swerve;
@@ -143,10 +143,8 @@ public class RobotContainer {
     private final PathPlannerTrajectory bump3PieceAlt =
             PathPlanner.loadPath("bump3PieceAutoAlt", 2.0, 2.5);
 
-    
     public RobotContainer() {
         switch (Constants.getMode()) {
-                
             case REAL:
                 s_Swerve =
                         new Swerve(
@@ -154,11 +152,9 @@ public class RobotContainer {
                                 new ModuleIOSparkMax(SwerveConstants.Mod0.constants),
                                 new ModuleIOSparkMax(SwerveConstants.Mod1.constants),
                                 new ModuleIOSparkMax(SwerveConstants.Mod2.constants),
-                                new ModuleIOSparkMax(SwerveConstants.Mod3.constants)
-                                );
+                                new ModuleIOSparkMax(SwerveConstants.Mod3.constants));
                 break;
 
-                
             default:
                 s_Swerve =
                         new Swerve(
@@ -166,8 +162,7 @@ public class RobotContainer {
                                 new ModuleIO() {},
                                 new ModuleIO() {},
                                 new ModuleIO() {},
-                                new ModuleIO() {}
-                                );
+                                new ModuleIO() {});
                 break;
         }
 
@@ -242,9 +237,6 @@ public class RobotContainer {
          * () -> s_Swerve.getPose())));
          */
 
-        
-
-        
         /*
          * operator.x().onTrue(new SelectCommand(
          * Map.ofEntries(
@@ -279,8 +271,7 @@ public class RobotContainer {
     }
 
     /** Ran once the robot is put in disabled */
-    public void disabledPeriodic() {
-    }
+    public void disabledPeriodic() {}
 
     public static GamePiece getGamePiece() {
         return gamePiece;
