@@ -1,0 +1,30 @@
+{
+  "rotations": [{ "axis": "x", "degrees": 90 }],
+  "position": [-0.72, 0.49, 0.1],
+  "cameras": [
+    {
+      "name": "leftCamera",
+      "rotations": [
+        { "axis": "x", "degrees": 0 },
+        { "axis": "y", "degrees": 20 },
+        { "axis": "z", "degrees": 5 }
+      ],
+      "position": [9.1505, 9.666, 31.185],
+      "resolution": [1280, 720],
+      "fov": 60
+    },
+    {
+      "name": "rightCamera",
+      "rotations": [
+        { "axis": "x", "degrees": 0 },
+        { "axis": "y", "degrees": 20 },
+        { "axis": "z", "degrees": 355 }
+      ],
+      "position": [9.1505, -9.666, 31.185],
+      "resolution": [1280, 720],
+      "fov": 60
+    }
+  ],
+  "components": [
+  ]
+}
