@@ -31,12 +31,12 @@ public class ModuleIOSparkMax implements ModuleIO {
 
     public ModuleIOSparkMax(SwerveModuleConstants moduleConstants) {
         /* Angle Encoder Config */
-        angleEncoder = angleMotor.getAbsoluteEncoder(Type.kDutyCycle);
-
+        
         this.moduleConstants = moduleConstants;
 
         /* Angle Motor Config */
         angleMotor = new CANSparkMax(moduleConstants.angleMotorID, MotorType.kBrushless);
+        angleEncoder = angleMotor.getAbsoluteEncoder(Type.kDutyCycle);
         integratedAngleEncoder = angleMotor.getEncoder();
         angleController = angleMotor.getPIDController();
         configAngleMotor();
@@ -71,8 +71,8 @@ public class ModuleIOSparkMax implements ModuleIO {
         driveMotor.set(percentOutput);
     }
 
-    public void setPosition(double absoultePosition) {
-        integratedAngleEncoder.setPosition(absoultePosition);
+    public void setPosition(double absolutePosition) {
+        integratedAngleEncoder.setPosition(absolutePosition);
     }
 
     private void configAngleMotor() {
@@ -89,6 +89,7 @@ public class ModuleIOSparkMax implements ModuleIO {
         angleController.setI(SwerveConstants.angleKI);
         angleController.setD(SwerveConstants.angleKD);
         angleController.setFF(SwerveConstants.angleKFF);
+        // angleController.setFeedbackDevice(angleEncoder);
         angleMotor.enableVoltageCompensation(SwerveConstants.voltageComp);
         angleMotor.burnFlash();
         resetToAbsolute();
