@@ -9,6 +9,7 @@ import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 import com.revrobotics.SparkMaxPIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.lib.config.SwerveModuleConstants;
 import frc.lib.util.CANSparkMaxUtil;
 import frc.lib.util.CANSparkMaxUtil.Usage;
@@ -91,14 +92,15 @@ public class ModuleIOSparkMax implements ModuleIO {
         angleController.setFF(SwerveConstants.angleKFF);
         // angleController.setFeedbackDevice(angleEncoder);
         angleMotor.enableVoltageCompensation(SwerveConstants.voltageComp);
-        angleMotor.burnFlash();
+        // angleMotor.burnFlash();
         resetToAbsolute();
     }
 
     /** */
     @Override
     public void resetToAbsolute() {
-        double absolutePosition = angleEncoder.getPosition() - moduleConstants.angleOffset.getDegrees();
+        double aPos = angleEncoder.getPosition() * 360 < 180 ? 0 - angleEncoder.getPosition() * 360 : angleEncoder.getPosition() * 360 - 180;
+        double absolutePosition = aPos - moduleConstants.angleOffset.getDegrees();
         setPosition(absolutePosition);
     }
 
@@ -117,6 +119,7 @@ public class ModuleIOSparkMax implements ModuleIO {
         driveController.setFF(SwerveConstants.angleKFF);
         driveMotor.enableVoltageCompensation(SwerveConstants.voltageComp);
         driveMotor.burnFlash();
+        new WaitCommand(5);
         driveEncoder.setPosition(0.0);
     }
 
