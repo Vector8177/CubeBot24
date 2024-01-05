@@ -9,6 +9,8 @@ import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 import com.revrobotics.SparkMaxPIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.lib.config.SwerveModuleConstants;
 import frc.lib.util.CANSparkMaxUtil;
@@ -79,8 +81,18 @@ public class ModuleIOSparkMax implements ModuleIO {
 
         angleController.setFeedbackDevice(angleEncoder);
         angleMotor.enableVoltageCompensation(SwerveConstants.voltageComp);
-        // angleMotor.burnFlash();
+        // System.out.println("BOBOBOBOBOBOBOBOBB" + angleMotor.burnFlash());
+        burnFlashInSync(angleMotor);
         resetToAbsolute();
+    }
+
+    public static void burnFlashInSync(CANSparkMax bob) {
+        Timer.delay(.25);
+        System.out.println("SPARKMAXSPARKMAX:   :::   " + bob.burnFlash());
+        Timer.delay(0.005);
+        Timer.delay(.25);
+        DriverStation.reportWarning("Burn Flash Complete", false);
+        
     }
 
     /** */
