@@ -54,7 +54,7 @@ public class Swerve extends SubsystemBase {
                         SwerveConstants.STATE_STANDARD_DEVIATIONS,
                         VecBuilder.fill(0, 0, 0));
 
-        resetToAbsolute();
+        // resetToAbsolute();
 
         field = new Field2d();
         chassisSpeeds = new ChassisSpeeds();
