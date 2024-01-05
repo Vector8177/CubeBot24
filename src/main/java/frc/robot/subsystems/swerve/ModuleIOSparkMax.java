@@ -50,24 +50,6 @@ public class ModuleIOSparkMax implements ModuleIO {
     }
 
     @Override
-    public void updateInputs(ModuleIOInputs inputs) {
-        inputs.absoluteEncoder = angleEncoder.getPosition();
-
-        inputs.drivePosition = driveEncoder.getPosition();
-        inputs.driveVelocityPerSec = driveEncoder.getVelocity();
-        inputs.driveAppliedVolts = driveMotor.getAppliedOutput() * driveMotor.getBusVoltage();
-        inputs.driveCurrentAmps = new double[] {driveMotor.getOutputCurrent()};
-        inputs.driveTempCelcius = new double[] {driveMotor.getMotorTemperature()};
-
-        inputs.turnAbsolutePosition = angleEncoder.getPosition();
-        inputs.turnPosition = integratedAngleEncoder.getPosition();
-        inputs.turnVelocityPerSec = integratedAngleEncoder.getVelocity();
-        inputs.turnAppliedVolts = angleMotor.getAppliedOutput() * angleMotor.getBusVoltage();
-        inputs.turnCurrentAmps = new double[] {angleMotor.getOutputCurrent()};
-        inputs.turnTempCelcius = new double[] {angleMotor.getMotorTemperature()};
-    }
-
-    @Override
     public void setMotorOutput(double percentOutput) {
         driveMotor.set(percentOutput);
     }
@@ -79,18 +61,23 @@ public class ModuleIOSparkMax implements ModuleIO {
     private void configAngleMotor() {
         angleMotor.restoreFactoryDefaults();
         CANSparkMaxUtil.setCANSparkMaxBusUsage(angleMotor, Usage.kPositionOnly);
+
         angleMotor.setSmartCurrentLimit(SwerveConstants.angleContinuousCurrentLimit);
         angleMotor.setInverted(SwerveConstants.angleInvert);
         angleMotor.setIdleMode(SwerveConstants.angleNeutralMode);
+
         integratedAngleEncoder.setPositionConversionFactor(SwerveConstants.angleConversionFactor);
+
         angleController.setPositionPIDWrappingEnabled(true);
         angleController.setPositionPIDWrappingMinInput(-180.0);
         angleController.setPositionPIDWrappingMaxInput(180.0);
+
         angleController.setP(SwerveConstants.angleKP);
         angleController.setI(SwerveConstants.angleKI);
         angleController.setD(SwerveConstants.angleKD);
         angleController.setFF(SwerveConstants.angleKFF);
-        // angleController.setFeedbackDevice(angleEncoder);
+
+        angleController.setFeedbackDevice(angleEncoder);
         angleMotor.enableVoltageCompensation(SwerveConstants.voltageComp);
         // angleMotor.burnFlash();
         resetToAbsolute();
@@ -131,6 +118,24 @@ public class ModuleIOSparkMax implements ModuleIO {
 
     @Override
     public void setAngle(Rotation2d angle) {
-        angleController.setReference(angle.getDegrees(), ControlType.kPosition);
+        angleController.setReference(angle.getDegrees()/360 != 1 ? angle.getDegrees()/360 : 0, ControlType.kPosition);
+    }
+
+    @Override
+    public void updateInputs(ModuleIOInputs inputs) {
+        inputs.absoluteEncoder = angleEncoder.getPosition();
+
+        inputs.drivePosition = driveEncoder.getPosition();
+        inputs.driveVelocityPerSec = driveEncoder.getVelocity();
+        inputs.driveAppliedVolts = driveMotor.getAppliedOutput() * driveMotor.getBusVoltage();
+        inputs.driveCurrentAmps = new double[] {driveMotor.getOutputCurrent()};
+        inputs.driveTempCelcius = new double[] {driveMotor.getMotorTemperature()};
+
+        inputs.turnAbsolutePosition = angleEncoder.getPosition();
+        inputs.turnPosition = integratedAngleEncoder.getPosition();
+        inputs.turnVelocityPerSec = integratedAngleEncoder.getVelocity();
+        inputs.turnAppliedVolts = angleMotor.getAppliedOutput() * angleMotor.getBusVoltage();
+        inputs.turnCurrentAmps = new double[] {angleMotor.getOutputCurrent()};
+        inputs.turnTempCelcius = new double[] {angleMotor.getMotorTemperature()};
     }
 }
